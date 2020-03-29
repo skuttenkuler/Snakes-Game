@@ -18,9 +18,9 @@ Renderer::Renderer( const std::size_t screen_width,
             }
 
             //create game window
-            sdl_window = SDL_CreateWindow("Snake Game", SDL_WINDOWPRO_CENTERED,
-                                            SDL_WINDOWPOS_CENTERED, screen_width,
-                                            screen_height, SDL_WINDOW_SHOWN);
+           sdl_window = SDL_CreateWindow("Snake Game", SDL_WINDOWPOS_CENTERED,
+                                SDL_WINDOWPOS_CENTERED, screen_width,
+                                screen_height, SDL_WINDOW_SHOWN);
             
             if (nullptr == sdl_window) {
                 std::cerr << "Could not create Game Window.\n";
@@ -55,7 +55,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &apple) {
     SDL_RenderFillRect(sdl_renderer, &block);
 
     //render snake
-    SDL_SetRenderDrawColor(sdl_renderer,  0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_SetRenderDrawColor(sdl_renderer,  0x00, 0xFF, 0x00, 0xFF);
     for (SDL_Point const &point : snake.body) {
         block.x = point.x * block.w;
         block.y = point.y * block.h;
@@ -66,7 +66,7 @@ void Renderer::Render(Snake const snake, SDL_Point const &apple) {
     block.x = static_cast<int>(snake.head_x) * block.w;
     block.y = static_cast<int>(snake.head_y) * block.h;
     if(snake.alive) {
-        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0xFF, 0x00, 0xFF);
   } else {
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   }

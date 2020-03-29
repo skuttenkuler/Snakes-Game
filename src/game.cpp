@@ -17,7 +17,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                     Uint32 frame_end;
                     Uint32 frame_duration;
                     int frame_count = 0;
-                    bool running = true
+                    bool running = true;
 
                     while(running) {
                         frame_start = SDL_GetTicks();
@@ -46,19 +46,20 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                         }
                     }
                 }
-            void Game:: PlaceApple() {
-                int x ,y;
-                while(true) {
-                    x = random_w(engine);
-                    y = random_y(engine);
-                    //make sure that the apple location is not occupied by the snake or prev apple already
-                    if(!snake.SnakeCell(x,y)) {
-                        apple.x = x;
-                        food.y = y;
-                        return;
-                    }
-                }
-            }
+void Game::PlaceApple() {
+  int x, y;
+  while (true) {
+    x = random_w(engine);
+    y = random_h(engine);
+    // Check that next apple location is not occupied by snake or current apple
+    if (!snake.SnakeCell(x, y)) {
+      apple.x = x;
+      apple.y = y;
+      return;
+    }
+  }
+}
+
             void Game::Update() {
                 if(!snake.alive) return;
                 snake.Update();
@@ -68,10 +69,10 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
                 //check for apple
                 if(apple.x == new_x && apple.y == new_y) {
-                    score ++
+                    score ++;
                     PlaceApple();
                     //grow snake and increase speed
-                    snake.AddBody();
+                    snake.GrowBody();
                     snake.speed += 0.02;
                 }
             }
@@ -79,6 +80,6 @@ void Game::Run(Controller const &controller, Renderer &renderer,
                 return score;
             }
             int Game::GetSize() const {
-                return snake.size
+                return snake.size;
             }
            
